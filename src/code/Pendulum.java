@@ -38,7 +38,8 @@ public class Pendulum extends JPanel implements Runnable {
 	}
 
 	@Override
-	public  void paintComponent(Graphics g) { // paintComponent(Graphics g) or paint()
+	public void paintComponent(Graphics g) { // paintComponent(Graphics g) or paint()
+	super.paintComponent(g);
 		ball1Size = m1 * sizeToMassRatio;
 		ball2Size = m2 * sizeToMassRatio;
 		g.setColor(Color.WHITE);
@@ -57,12 +58,16 @@ public class Pendulum extends JPanel implements Runnable {
 		pointsBall1.add(new Point(ball1.x,ball1.y));
 		pointsBall2.add(new Point(ball2.x,ball2.y));		
 		if(paintTrail) {
-			for(Point p: pointsBall1) {
-		g.fillOval((int)p.getX(),(int) p.getY(), 3, 3);							
+//			for(Point p: pointsBall1) {
+//		g.fillOval((int)p.getX(),(int) p.getY(), 3, 3);							
+//			}
+//			for(Point p: pointsBall2) {
+//				g.fillOval((int)p.getX(),(int) p.getY(), 3, 3);								
+//					}
+			for(int i=1; i< pointsBall2.size();i++) {
+				g.drawLine((int)pointsBall2.get(i).getX(),(int)pointsBall2.get(i).getY() ,(int)pointsBall2.get(i-1).getX() ,(int)pointsBall2.get(i-1).getY());
 			}
-			for(Point p: pointsBall2) {
-				g.fillOval((int)p.getX(),(int) p.getY(), 3, 3);							
-					}
+			
 		}
 		
 		g.drawLine(anchorX, anchorY, ball1X, ball1Y);
